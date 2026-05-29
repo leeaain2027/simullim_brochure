@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>HeartSignal</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    :root {
+      /* sophisticated warm-neutral gray */
+      --bg-top: #e9e6e2;
+      --bg-bottom: #d6d2cc;
+      --ink: #2a2724;
+      --ink-soft: #6b665f;
+      --hairline: rgba(42, 39, 36, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* very subtle grain texture for refinement */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.045 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 48px) clamp(48px, 8vw, 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(40px, 6vw, 72px);
+    }
+
+    .header {
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s forwards;
+    }
+
+    h1 {
+      font-family: inherit;
+      font-weight: 500;
+      font-size: clamp(56px, 9vw, 96px);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: lowercase;
+      color: var(--ink-soft);
+      padding-left: 0.42em; /* visual centering for letter-spacing */
+    }
+
+    .rule {
+      width: 40px;
+      height: 1px;
+      background: var(--hairline);
+      margin: 28px auto 0;
+    }
+
+    figure {
+      margin: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+
+    figure:nth-of-type(1) { animation-delay: 0.25s; }
+    figure:nth-of-type(2) { animation-delay: 0.45s; }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: var(--ink-soft);
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.7s forwards;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      /* layered, soft shadow — close contact + deep ambient */
+      box-shadow:
+        0 1px 2px rgba(30, 28, 25, 0.06),
+        0 6px 14px rgba(30, 28, 25, 0.08),
+        0 24px 48px -12px rgba(30, 28, 25, 0.18),
+        0 48px 96px -24px rgba(30, 28, 25, 0.20);
+      transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+                  box-shadow 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    figure img:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 1px 2px rgba(30, 28, 25, 0.06),
+        0 8px 18px rgba(30, 28, 25, 0.10),
+        0 28px 56px -12px rgba(30, 28, 25, 0.22),
+        0 56px 112px -24px rgba(30, 28, 25, 0.24);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .header, figure, footer {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+      figure img { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="header">
+      <h1>심울림</h1>
+      <div class="subtitle">sim ullim</div>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+
+    <figure>
+      <img src="HeartSignal_outside.png" alt="outside" loading="eager" />
+    </figure>
+
+    <figure>
+      <img src="HeartSignal_inside.png" alt="inside" loading="lazy" />
+    </figure>
+
+    <footer>프로젝트 헤일레이 팀</footer>
+  </main>
+</body>
+</html>
