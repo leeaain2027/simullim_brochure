@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/langding_simullim.html" }
+    { "source": "/", "destination": "/simullim_brochure.html" }
   ]
 }
